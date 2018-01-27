@@ -1,26 +1,37 @@
-html {
+html{
   font-size: 62.5%;
 }
-
-body {
-  font-family: Helvetica, Arial, sans-serif;
+body{
+  font-family: Helvetica,Arial,sans-serif;
   font-size: $m-size;
 }
 
-button {
-  cursor: pointer;
+button{
+  cursor:pointer;
 }
 
-button:disabled {
+button:disabled{
   cursor: default;
 }
 
 .is-active{
-	font-weight: bold;
-	
+  font-weight: bold;
 }
 
-.links{
-	margin-top: 16px;
+.projectDisplay {
+  //  background-color: red;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 10px;
+  font-size: 20px;
+  width: 50%;
+  border-style: double;
+  padding-left: 10px;
+  padding-bottom: 10px;
+
 }
 
+.myLink{
+  text-decoration:none;
+  background-color: white;
+}

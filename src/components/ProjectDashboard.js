@@ -13,21 +13,6 @@ state = {
 		currentLocation:'',
 	}
 
-componentWillMount(){
-	console.log("Hello from on Click");
-		axios({
-		  method: 'get',
-		  url: 'http://starlord.hackerearth.com/kickstarter',
-		}).then((response)=>{
-		    	console.log(response.data, 'first response')
-
-					this.setState(()=>({projects:response.data, filteredProjects:response.data}))
-		    })
-		    .catch((err)=>{
-		      console.log(err,'error!! try again');
-		    });
-
-}
 
 filterTitle = (e) => {
 	var searchTitle=e.target.value;
@@ -41,15 +26,19 @@ filterTitle = (e) => {
 filterLocation = (e)=>{
 	const location=e.target.value;
 
-	const filteredArray = this.state.projects.filter(function(itm){
-  return itm["location"].includes(location)
-	});
+	if(e.target.value==="all"){
+		this.setState(()=>({filteredProjects:this.state.projects}))
+	}
+	else {
+			const filteredArray = this.state.projects.filter(function(itm){
+			return itm["location"].includes(location)
+			});
 
-	console.log(filteredArray);
-	this.setState(()=>({filteredProjects:filteredArray, currentLocation:location}));
+			console.log(filteredArray);
+			this.setState(()=>({filteredProjects:filteredArray, currentLocation:location}));
+	}
+
 }
-
-
 
 sortByFilter = (e) => {
 	if (e.target.value == 'asc percent') {
@@ -84,6 +73,21 @@ sortByFilter = (e) => {
 		}
 }
 
+componentWillMount(){
+	console.log("Hello from on Click");
+		axios({
+		  method: 'get',
+		  url: 'http://starlord.hackerearth.com/kickstarter',
+		}).then((response)=>{
+		    	console.log(response.data, 'first response')
+
+					this.setState(()=>({projects:response.data, filteredProjects:response.data}))
+		    })
+		    .catch((err)=>{
+		      console.log(err,'error!! try again');
+		    });
+}
+
 render(){
 	console.log(this.state.filteredProjects);
 	const filteredLocation = [... new Set(this.state.projects.map(a => a.location))];
@@ -101,10 +105,8 @@ render(){
 				<option value="desc percent">Percentage Funded: Descending</option>
 		</select>
 
-
-
 			<select value={this.state.currentLocation} onChange={this.filterLocation}>
-				<option value="none">Select the location you wish to filter by</option>
+				<option value="all">Select the location you wish to filter by</option>
 				{mapOption}
 			</select>
 		<DisplayProject projects={this.state.filteredProjects}/>

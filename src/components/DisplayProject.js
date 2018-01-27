@@ -4,7 +4,7 @@ import DisplayProjectItem from './DisplayProjectItem';
 const DisplayProject = (props) => (
   <div>
     {props.projects.map((project,index)=>(
-      <DisplayProjectItem project={project} key = {index}/>)
+      <DisplayProjectItem  project={project} key = {index}/>)
     )}
 </div>
   )
